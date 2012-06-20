@@ -15,7 +15,7 @@ public class MessageDigestMainMenu extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldPlainText;
 	private JTextField textFieldCipherText;
-	private MessageDigestTypeEnum messageDigestTypeEnum = MessageDigestTypeEnum.None;
+	private MessageDigestTypeEnum messageDigestTypeEnum = MessageDigestTypeEnum.SHA1;
 	
 	public MessageDigestMainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
