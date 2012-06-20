@@ -49,6 +49,7 @@ public class MessageDigestMainMenu extends JFrame {
 		
 		JRadioButton radioButtonToMD5 = new JRadioButton("To MD5");
 		radioButtonToMD5.setBounds(94, 55, 82, 23);
+		radioButtonToSHA1.setSelected(true);
 		contentPane.add(radioButtonToMD5);
 		radioButtonToMD5.setActionCommand("MD5");
 		radioButtonToMD5.addActionListener(new ActionListener() 
