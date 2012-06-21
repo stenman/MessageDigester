@@ -69,20 +69,16 @@ public class MessageDigestMainMenu extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(messageDigestTypeEnum == MessageDigestTypeEnum.SHA1) 
+				if(messageDigestTypeEnum == MessageDigestTypeEnum.None) 
+				{
+					textFieldCipherText.setText("You have to choose a cryptocraphic hash funcion first!");
+				}
+				else
 				{
 					String plainText = textFieldPlainText.getText();
 					MessageDigester md = new MessageDigester();
-					String cipherText = md.DigestMessage(plainText.getBytes());
+					String cipherText = md.DigestMessage(plainText.getBytes(), messageDigestTypeEnum);
 					textFieldCipherText.setText(cipherText);
-				}
-				else if(messageDigestTypeEnum == MessageDigestTypeEnum.MD5) 
-				{
-					textFieldCipherText.setText("MD5 cryptography not implemented yet!");
-				}
-				else if(messageDigestTypeEnum == MessageDigestTypeEnum.None) 
-				{
-					textFieldCipherText.setText("You have to choose a cryptocraphic hash funcion first!");
 				}
 			}
 		});

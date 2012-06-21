@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.messagedigester.MessageDigestTypeEnum;
 import com.messagedigester.MessageDigester;
 
 public class MessageDigesterTest {
@@ -17,7 +18,7 @@ public class MessageDigesterTest {
 		 String expected = "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3";
 		
 		 //Act
-		 String actual = mdr.DigestMessage(messageToDigest);
+		 String actual = mdr.DigestMessage(messageToDigest, MessageDigestTypeEnum.SHA1);
 		
 		 //Assert
 		 assertEquals(expected, actual);
