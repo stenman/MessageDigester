@@ -7,12 +7,12 @@ public class MessageDigester
 {
 	static final String HEXES = "0123456789ABCDEF";
 
-	public String DigestMessage(byte[] messageToDigest, MessageDigestTypeEnum messageDigestTypeEnum) 
+	public String DigestMessage(byte[] messageToDigest, DigestAlgorithmEnum digestAlgorithmEnum) 
 	{
 	    MessageDigest md = null;
 	    try 
 	    {
-	    	md = MessageDigest.getInstance(messageDigestTypeEnum.toString());
+	    	md = MessageDigest.getInstance(digestAlgorithmEnum.toString());
 	    }
 	    catch(NoSuchAlgorithmException e) 
 	    {

@@ -1,6 +1,6 @@
 package com.messagedigester;
 
-public enum MessageDigestTypeEnum 
+public enum DigestAlgorithmEnum 
 {
 	SHA1
 	{
@@ -15,6 +15,14 @@ public enum MessageDigestTypeEnum
 		public String toString()
 		{
 			return "MD5";
+		}
+	},
+	
+	X
+	{
+		public String toString()
+		{
+			return "SHA-512";
 		}
 	},
 	

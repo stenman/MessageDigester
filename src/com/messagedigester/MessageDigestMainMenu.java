@@ -9,13 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.DropMode;
 
 public class MessageDigestMainMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldPlainText;
-	private JTextField textFieldCipherText;
-	private MessageDigestTypeEnum messageDigestTypeEnum = MessageDigestTypeEnum.SHA1;
+	private JTextPane textPaneCipherText;
+	private DigestAlgorithmEnum digestAlgorithmEnum = DigestAlgorithmEnum.SHA1;
 	
 	public MessageDigestMainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,62 +42,72 @@ public class MessageDigestMainMenu extends JFrame {
 		
 		JRadioButton radioButtonToSHA1 = new JRadioButton("To SHA-1");
 		radioButtonToSHA1.setBounds(10, 55, 82, 23);
+		radioButtonToSHA1.setSelected(true);
 		contentPane.add(radioButtonToSHA1);
-		radioButtonToSHA1.setActionCommand("SHA1");
 		radioButtonToSHA1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				messageDigestTypeEnum = MessageDigestTypeEnum.SHA1;
+				digestAlgorithmEnum = DigestAlgorithmEnum.SHA1;
 			}
 		});
 		
 		JRadioButton radioButtonToMD5 = new JRadioButton("To MD5");
 		radioButtonToMD5.setBounds(94, 55, 82, 23);
-		radioButtonToSHA1.setSelected(true);
 		contentPane.add(radioButtonToMD5);
-		radioButtonToMD5.setActionCommand("MD5");
 		radioButtonToMD5.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				messageDigestTypeEnum = MessageDigestTypeEnum.MD5;
+				digestAlgorithmEnum = DigestAlgorithmEnum.MD5;
+			}
+		});
+		
+		JRadioButton radioButtonToX = new JRadioButton("To X");
+		radioButtonToX.setBounds(178, 55, 82, 23);
+		contentPane.add(radioButtonToX);
+		radioButtonToX.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				digestAlgorithmEnum = DigestAlgorithmEnum.X;
 			}
 		});
 		
 		ButtonGroup radioButtonGroup = new ButtonGroup();
 		radioButtonGroup.add(radioButtonToSHA1);
 		radioButtonGroup.add(radioButtonToMD5);
+		radioButtonGroup.add(radioButtonToX);
 		
 		JButton buttonConvert = new JButton("Convert!");
 		buttonConvert.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(messageDigestTypeEnum == MessageDigestTypeEnum.None) 
+				if(digestAlgorithmEnum == DigestAlgorithmEnum.None) 
 				{
-					textFieldCipherText.setText("You have to choose a cryptocraphic hash funcion first!");
+					textPaneCipherText.setText("You have to choose a cryptocraphic hash funcion first!");
 				}
 				else
 				{
 					String plainText = textFieldPlainText.getText();
 					MessageDigester md = new MessageDigester();
-					String cipherText = md.DigestMessage(plainText.getBytes(), messageDigestTypeEnum);
-					textFieldCipherText.setText(cipherText);
+					String cipherText = md.DigestMessage(plainText.getBytes(), digestAlgorithmEnum);
+					textPaneCipherText.setText(cipherText);
 				}
 			}
 		});
 		buttonConvert.setBounds(10, 85, 89, 23);
 		contentPane.add(buttonConvert);
 		
-		textFieldCipherText = new JTextField();
-		textFieldCipherText.setBounds(10, 160, 564, 20);
-		contentPane.add(textFieldCipherText);
-		textFieldCipherText.setColumns(10);
-		textFieldCipherText.setEditable(false);
+		textPaneCipherText = new JTextPane();
+		textPaneCipherText.setFont(new Font("Consolas", Font.PLAIN, 12));
+		textPaneCipherText.setEditable(false);
+		textPaneCipherText.setBounds(10, 163, 564, 62);
+		contentPane.add(textPaneCipherText);
 		
 		JLabel labelCiphertext = new JLabel("Cipher text");
-		labelCiphertext.setBounds(10, 141, 109, 14);
+		labelCiphertext.setBounds(10, 144, 109, 14);
 		contentPane.add(labelCiphertext);
 	}
 }	
