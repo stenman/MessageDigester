@@ -19,8 +19,8 @@ public class MessageDigestMainMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldPlainText;
-	private JTextPane textPaneCipherText;
 	private DigestAlgorithmEnum digestAlgorithmEnum = DigestAlgorithmEnum.SHA1;
+	private JTextArea textAreaCipherText;
 	
 	public MessageDigestMainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,28 +86,29 @@ public class MessageDigestMainMenu extends JFrame {
 			{
 				if(digestAlgorithmEnum == DigestAlgorithmEnum.None) 
 				{
-					textPaneCipherText.setText("You have to choose a cryptocraphic hash funcion first!");
+					textAreaCipherText.append("You have to choose a cryptocraphic hash funcion first!");
 				}
 				else
 				{
 					String plainText = textFieldPlainText.getText();
 					MessageDigester md = new MessageDigester();
 					String cipherText = md.DigestMessage(plainText.getBytes(), digestAlgorithmEnum);
-					textPaneCipherText.setText(cipherText);
+					textAreaCipherText.setText(cipherText);
 				}
 			}
 		});
 		buttonConvert.setBounds(10, 85, 89, 23);
 		contentPane.add(buttonConvert);
 		
-		textPaneCipherText = new JTextPane();
-		textPaneCipherText.setFont(new Font("Consolas", Font.PLAIN, 12));
-		textPaneCipherText.setEditable(false);
-		textPaneCipherText.setBounds(10, 163, 564, 62);
-		contentPane.add(textPaneCipherText);
-		
 		JLabel labelCiphertext = new JLabel("Cipher text");
-		labelCiphertext.setBounds(10, 144, 109, 14);
+		labelCiphertext.setBounds(10, 149, 109, 14);
 		contentPane.add(labelCiphertext);
+		
+		textAreaCipherText = new JTextArea();
+		textAreaCipherText.setEditable(false);
+		textAreaCipherText.setFont(new Font("Consolas", Font.PLAIN, 12));
+		textAreaCipherText.setLineWrap(true);
+		textAreaCipherText.setBounds(10, 169, 564, 70);
+		contentPane.add(textAreaCipherText);
 	}
 }	
